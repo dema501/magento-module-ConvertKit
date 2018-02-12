@@ -30,7 +30,7 @@ Supports Magento 1.4.2.0 up to 1.9.3.x.
 ## Configure Magento
 * The plugin is configured under **System**->**Configuration**->**Newsletter** open ConvertKit Notification tab.
 * You have to provide ConverKit API Key, API Secret and Form Id on settings form.
-* Note: It will disable all email confirmations from standard Newsletter Magebto module. You can setup confirmation email under ConverKit account
+* Note: It will disable all email confirmations from standard Magento Newsletter module. You can setup confirmation email under ConverKit account
 
 
 ## Support
