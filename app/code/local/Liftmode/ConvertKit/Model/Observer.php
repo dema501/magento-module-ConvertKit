@@ -40,7 +40,7 @@ class Liftmode_ConvertKit_Model_Observer {
 
             $return = $rc->doRequest(sprintf('forms/%s/subscribe', Mage::getStoreConfig(self::RC_FORM_ID, Mage::app()->getStore())), 'post',  $params);
 
-            Mage::log(array('notify referral order------>>>', $params, $return), null, 'ConvertKit.log');
+            Mage::log(array($params, $return), null, 'ConvertKit.log');
         }
         elseif ($_data['subscriber_status'] === Mage_Newsletter_Model_Subscriber::STATUS_UNSUBSCRIBED) {
             // curl -x PUT https://api.convertkit.com/v3/unsubscribe
@@ -56,7 +56,7 @@ class Liftmode_ConvertKit_Model_Observer {
             );
 
             $return = $rc->doRequest('unsubscribe', 'put',  $params);
-            Mage::log(array('notify referral order------>>>', $params, $return), null, 'ConvertKit.log');
+            Mage::log(array($params, $return), null, 'ConvertKit.log');
         }
 
         return $this;
