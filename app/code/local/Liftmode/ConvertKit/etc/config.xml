@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * @category   Mage
+ * @package    Liftmode_ConvertKit
+ * @copyright  Copyright (c)  Dmitry Bashlov, contributors.
+ */
+-->
+<config>
+    <modules>
+        <Liftmode_ConvertKit>
+            <version>1.5</version>
+        </Liftmode_ConvertKit>
+    </modules>
+    <global>
+        <models>
+            <convertkit>
+                <class>Liftmode_ConvertKit_Model</class>
+            </convertkit>
+
+            <newsletter>
+                <rewrite>
+                    <subscriber>Liftmode_ConvertKit_Model_Subscriber</subscriber>
+                </rewrite>
+            </newsletter>
+        </models>
+
+        <helpers>
+            <convertkit>
+                <class>Liftmode_ConvertKit_Helper</class>
+            </convertkit>
+        </helpers>
+
+        <events>
+            <newsletter_subscriber_save_commit_after>
+                <observers>
+                    <notify_convertkit_about_new_subscriber>
+                        <class>convertkit/observer</class>
+                        <method>notifyConvertKitAboutNewSubscriber</method>
+                    </notify_convertkit_about_new_subscriber>
+                </observers>
+            </newsletter_subscriber_save_commit_after>
+        </events>
+    </global>
+</config>

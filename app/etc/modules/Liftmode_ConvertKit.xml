@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * @category   Mage
+ * @package    Liftmode_ConvertKit
+ * @copyright  Copyright (c)  Dmitry Bashlov, contributors.
+ */
+-->
+<config>
+    <modules>
+        <Liftmode_ConvertKit>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Newsletter />
+            </depends>
+        </Liftmode_ConvertKit>
+    </modules>
+</config>
+
