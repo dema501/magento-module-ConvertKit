@@ -11,6 +11,7 @@ class Liftmode_ConvertKit_Model_Observer {
     const RC_API_KEY          = 'newsletter/convertkit/api_key';
     const RC_API_SECRET       = 'newsletter/convertkit/api_secret';
     const RC_FORM_ID          = 'newsletter/convertkit/form_id';
+    const RC_TAGS             = 'newsletter/convertkit/tags';
 
     public function notifyConvertKitAboutNewSubscriber(Varien_Event_Observer $observer) {
         if (!Mage::getStoreConfig(self::RC_MODULE_ENABLE, Mage::app()->getStore())) {
@@ -29,16 +30,18 @@ class Liftmode_ConvertKit_Model_Observer {
             //     -d '{ "api_secret": "<your_secret_api_key>",\
             //           "email": "jonsnow@example.com", "first_name": "John" }'
 
-
-            $rc = Mage::getModel('convertkit/convertKit');
-
             $params = array(
                 'email'        => $_data['subscriber_email'],
                 'first_name'   => $_data['subscriber_firstname'],
                 'api_key'      => Mage::getStoreConfig(self::RC_API_KEY, Mage::app()->getStore()),
+                'tags'         => Mage::getStoreConfig(self::RC_TAGS, Mage::app()->getStore()),
             );
 
-            $return = $rc->doRequest(sprintf('forms/%s/subscribe', Mage::getStoreConfig(self::RC_FORM_ID, Mage::app()->getStore())), 'post',  $params);
+            $return = Mage::getModel('convertkit/convertKit')->doRequest(
+                sprintf('forms/%s/subscribe', Mage::getStoreConfig(self::RC_FORM_ID, Mage::app()->getStore())),
+                'post',
+                $params
+            );
 
             Mage::log(array($params, $return), null, 'ConvertKit.log');
         }
@@ -48,14 +51,13 @@ class Liftmode_ConvertKit_Model_Observer {
             //     -d '{ "api_secret": "<your_secret_api_key>",\
             //           "email": "jonsnow@example.com" }'
 
-            $rc = Mage::getModel('convertkit/convertKit');
-
             $params = array(
                 'email'        => $_data['subscriber_email'],
                 'api_secret'      => Mage::getStoreConfig(self::RC_API_SECRET, Mage::app()->getStore()),
             );
 
-            $return = $rc->doRequest('unsubscribe', 'put',  $params);
+            $return = Mage::getModel('convertkit/convertKit')->doRequest('unsubscribe', 'put',  $params);
+
             Mage::log(array($params, $return), null, 'ConvertKit.log');
         }
 
